@@ -25,7 +25,9 @@ const createFeedback = asyncHandler(async (req, res) => {
 // @route   GET /api/feedback
 // @access  Private
 const getAllFeedback = asyncHandler(async (req, res) => {
-  const feedback = await Feedback.find();
+  // console.log(req.user)
+  // const feedback = await Feedback.find();
+  const feedback = await Feedback.find({user: req.user._id});
 
   res.status(200).json(feedback);
 });
@@ -34,7 +36,7 @@ const getAllFeedback = asyncHandler(async (req, res) => {
 // @route   GET /api/feedback/:id
 // @access  Private
 const getFeedback = asyncHandler(async (req, res) => {
-  console.log(req.user)
+  // console.log(req.user)
   const feedback = await Feedback.findById(req.params.id);
 
   if (!feedback) {
